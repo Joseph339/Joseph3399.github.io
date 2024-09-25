@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff7f50, #ff69b4, #1e90ff);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #fff;
+            margin-top: 50px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            animation: bounce 2s infinite;
+        }
+
+        p {
+            font-size: 1.5em;
+            color: #fff;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .balloons {
+            width: 100px;
+            position: absolute;
+            top: 90%; /* Globos más abajo */
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                top: 100%;
+                opacity: 0;
+            }
+            50% {
+                top: 50%;
+                opacity: 1;
+            }
+            100% {
+                top: -10%;
+                opacity: 0;
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .confetti div {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: confetti-fall 5s linear infinite;
+            border-radius: 50%;
+        }
+
+        .confetti div:nth-child(1) { left: 20%; background-color: #ff69b4; }
+        .confetti div:nth-child(2) { left: 50%; background-color: #1e90ff; }
+        .confetti div:nth-child(3) { left: 80%; background-color: #ff4500; }
+        .confetti div:nth-child(4) { left: 30%; background-color: #32cd32; }
+        .confetti div:nth-child(5) { left: 70%; background-color: #ffd700; }
+
+        @keyframes confetti-fall {
+            0% { top: -10%; transform: rotate(0deg); }
+            100% { top: 110%; transform: rotate(360deg); }
+        }
+
+        /* Estilos del botón */
+        #sorpresaBtn {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            z-index: 2; /* Asegurarse de que el botón esté por encima del confeti */
+        }
+
+        #sorpresaBtn:hover {
+            background-color: #ff4500;
+        }
+
+        #mensajeSorpresa {
+            display: none;
+            font-size: 1.5em;
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Estilos de las estrellas */
+        .estrella {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: yellow;
+            border-radius: 50%;
+            animation: caer 6s infinite;
+        }
+
+        @keyframes caer {
+            0% { top: -10%; left: calc(100% * var(--pos)); }
+            100% { top: 110%; }
+        }
+
+        /* Estilos para reacciones */
+        .reaccion {
+            position: absolute;
+            animation: aparecer 1s forwards;
+            z-index: 3; /* Asegurarse de que la reacción esté por encima de otros elementos */
+        }
+
+        @keyframes aparecer {
+            0% { opacity: 0; transform: scale(0); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <b><h1>🎉 ¡Feliz Cumpleaños Preciosa! 🎉</h1></b>
+    <p>Espero que este día esté lleno de alegría, amor y sorpresas especiales para ti, recuerda que eres una chica sorprendente
+        para mi es un gran placer compartir este dia junto a ti y que diosito te de muchos añitos mas, que me permita esta en cada momento
+        junto a ti y poder compartir mas nuestras vidas hasta que diosito nos lo permita teamito mucho. 🎂🎁</p>
+        <p>Agradezco cada día que la vida haya unido nuestros caminos y permitido nuestra conexión. Eres todo lo que siempre soñé y soy la persona más afortunada del mundo por poder compartir mi vida contigo. Feliz cumpleaños.</p>
+        <p>Eres la razón por la que mis ojos se iluminan todos los días y mi sonrisa no se desvanece. Hoy más que nunca puedo decir que estoy enamorado de la vida, y la razón de eso eres tú. ¡Feliz cumpleaños!</p>
+        <img src="1.png" alt="Globos" class="balloons">
+    
+    <!-- Confetti effect -->
+    <div class="confetti">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Estrellas flotando -->
+    <script>
+        for (let i = 0; i < 10; i++) {
+            const estrella = document.createElement("div");
+            estrella.classList.add("estrella");
+            estrella.style.setProperty('--pos', Math.random());
+            estrella.style.animationDelay = `${Math.random() * 5}s`;
+            document.body.appendChild(estrella);
+        }
+    </script>
+
+    <!-- Botón sorpresa -->
+    <button id="sorpresaBtn">¡Abremeeee!</button>
+    <p id="mensajeSorpresa">🎉 https://www.youtube.com/watch?v=5ar42kauTd8 🎉</p>
+
+    <script>
+        // Mostrar mensaje sorpresa al hacer clic en el botón
+        document.getElementById("sorpresaBtn").addEventListener("click", function() {
+            document.getElementById("mensajeSorpresa").style.display = "block";
+            this.style.display = "none"; // Ocultar el botón después de hacer clic
+            
+            // Crear reacciones animadas
+            for (let i = 0; i < 15; i++) { // Cambia 3 a 15 para más reacciones
+                const reaccion = document.createElement("img");
+                reaccion.src = "https://img.icons8.com/color/96/000000/confetti.png"; // Cambia la imagen a una de tu elección
+                reaccion.classList.add("reaccion");
+                reaccion.style.left = `${Math.random() * 100}vw`; // Posición aleatoria horizontal
+                reaccion.style.top = `${Math.random() * 100}vh`; // Posición aleatoria vertical
+                reaccion.style.width = "50px"; // Tamaño de la imagen
+                reaccion.style.animationDuration = `${Math.random() * 2 + 1}s`; // Duración aleatoria de la animación
+                document.body.appendChild(reaccion);
+                
+                // Eliminar la reacción después de un tiempo
+                setTimeout(() => {
+                    reaccion.remove();
+                }, 3000);
+            }
+        });
+    </script>
+    
+</body>
+</html>
